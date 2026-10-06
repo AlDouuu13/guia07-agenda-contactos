@@ -27,8 +27,11 @@ function mostrarContactos() {
       e.stopPropagation();
       eliminarContacto(c.id);
     });
-    tarjeta.appendChild(btnEliminar);
 
+    tarjeta.appendChild(btnEliminar);
+    tarjeta.addEventListener("click", function () {
+      verDetalle(c);
+    });
     listaContactos.appendChild(tarjeta);
   });
 }
@@ -67,4 +70,15 @@ function eliminarContacto(id) {
   document.getElementById("detalleContacto").textContent = "Selecciona un contacto.";
   mensaje.textContent = "Contacto eliminado.";
   mensaje.style.color = "green";
+}
+
+function verDetalle(c) {
+  const detalle = document.getElementById("detalleContacto");
+  detalle.innerHTML = "";
+
+  ["Nombre: " + c.nombre, "Teléfono: " + c.telefono, "Correo: " + c.correo].forEach(function (linea) {
+    const p = document.createElement("p");
+    p.textContent = linea;
+    detalle.appendChild(p);
+  });
 }
