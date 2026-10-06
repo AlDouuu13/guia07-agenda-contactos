@@ -20,6 +20,15 @@ function mostrarContactos() {
     info.textContent = c.nombre + " - " + c.telefono;
     tarjeta.appendChild(info);
 
+    const btnEliminar = document.createElement("button");
+    btnEliminar.textContent = "Eliminar";
+    btnEliminar.className = "eliminar";
+    btnEliminar.addEventListener("click", function (e) {
+      e.stopPropagation();
+      eliminarContacto(c.id);
+    });
+    tarjeta.appendChild(btnEliminar);
+
     listaContactos.appendChild(tarjeta);
   });
 }
@@ -49,3 +58,13 @@ formContacto.addEventListener("submit", function (e) {
   mensaje.textContent = "Contacto guardado correctamente.";
   mensaje.style.color = "green";
 });
+
+function eliminarContacto(id) {
+  contactos = contactos.filter(function (c) {
+    return c.id !== id;
+  });
+  mostrarContactos();
+  document.getElementById("detalleContacto").textContent = "Selecciona un contacto.";
+  mensaje.textContent = "Contacto eliminado.";
+  mensaje.style.color = "green";
+}
