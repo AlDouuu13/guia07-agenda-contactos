@@ -25,3 +25,27 @@ function mostrarContactos() {
 }
 
 mostrarContactos();
+
+const formContacto = document.getElementById("formContacto");
+const mensaje = document.getElementById("mensaje");
+
+formContacto.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const nombre = document.getElementById("nombre").value.trim();
+  const telefono = document.getElementById("telefono").value.trim();
+  const correo = document.getElementById("correo").value.trim();
+
+  if (nombre === "" || telefono === "" || correo === "") {
+    mensaje.textContent = "Completa todos los campos.";
+    mensaje.style.color = "crimson";
+    return;
+  }
+
+  contactos.push({ id: Date.now(), nombre: nombre, telefono: telefono, correo: correo });
+  mostrarContactos();
+  formContacto.reset();
+
+  mensaje.textContent = "Contacto guardado correctamente.";
+  mensaje.style.color = "green";
+});
